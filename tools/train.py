@@ -66,6 +66,20 @@ def make_parser():
         help="Adopting mix precision training.",
     )
     parser.add_argument(
+        "--backbone",
+        help="model_name",
+        default='./compressed_model_60.pt'
+        # default=None
+    )
+
+    parser.add_argument(
+        "--head",
+        help="head weight of the original model",
+        default='./yolox_s.pth'
+        # default=None
+    )
+
+    parser.add_argument(
         "--cache",
         dest="cache",
         default=False,
@@ -114,7 +128,8 @@ if __name__ == "__main__":
     args = make_parser().parse_args()
     exp = get_exp(args.exp_file, args.name)
     exp.merge(args.opts)
-
+    exp.merge(['backbone', args.backbone])
+    exp.merge(['_head', args.head])
     if not args.experiment_name:
         args.experiment_name = exp.exp_name
 
