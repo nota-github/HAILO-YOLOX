@@ -3,10 +3,10 @@
 
 # user experiments directory
 YOLOX_outputs/
-datasets/
+datasets/VOCdevkit
+datasets/train2017.zip
 # do not ignore datasets under yolox/data
 !*yolox/data/datasets/
-!datasets/Hailo_EVS2022_Demo_Training_Data
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
