@@ -186,7 +186,7 @@ class Trainer:
 
     def before_epoch(self):
         logger.info("---> start train epoch{}".format(self.epoch + 1))
-
+        self.model.training = True
         if self.epoch + 1 == self.max_epoch - self.exp.no_aug_epochs or self.no_aug:
             logger.info("--->No mosaic aug now!")
             self.train_loader.close_mosaic()
@@ -204,6 +204,7 @@ class Trainer:
 
         if (self.epoch + 1) % self.exp.eval_interval == 0:
             all_reduce_norm(self.model)
+            self.model.training = False
             self.evaluate_and_save_model()
 
     def before_iter(self):
